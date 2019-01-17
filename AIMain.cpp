@@ -393,7 +393,7 @@ int checkSurroundings(int x){
 	if(clear == 0){
 		printf("Silence\n");
 	}
-	printf("Clear: %d\n", clear);
+	//printf("Clear: %d\n", clear);
 
 	return clear;
 }
@@ -408,7 +408,7 @@ void printCoordinates(int i){
 }
 
 void adjustProb(int status, int loc){
-	printf("Adjust Prob\n");
+	//printf("Adjust Prob\n");
 	if(status == 0){ // If the status = 0 all nearby blocks prob equals 0
 		if(loc > 4){
 			pitP[loc - 5] = 0;
@@ -498,7 +498,7 @@ void adjustProb(int status, int loc){
 	}
 
 	int pitNum = ((status & 8) >> 3) + ((status & 4) >> 2) + ((status & 2) >> 1);
-	printf("pitNum: %d\n", pitNum);
+	//printf("pitNum: %d\n", pitNum);
 
 	int possible = 0;
 
@@ -611,7 +611,7 @@ int printOptions(int loc){
 
 	}
 
-	printf("Where to go status: %d\n", status);
+	//printf("Where to go status: %d\n", status);
 
 	return status;
 }
