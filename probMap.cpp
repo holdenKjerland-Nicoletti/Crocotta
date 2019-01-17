@@ -340,7 +340,7 @@ void adjustProb(int status, int loc){
 		}
 		if((loc % 5) != 4){
 			if(monsterP[loc + 1] != 0){
-				monsterP[loc + 5] = prob;
+				monsterP[loc + 1] = prob;
 			}
 		}
 
@@ -363,48 +363,48 @@ void adjustProb(int status, int loc){
 	int possible = 0;
 
 	if(loc > 4){
-		if(pitP[loc - 5] != 0){ // If the prob != 0 it is possible
+		if(pitP[loc - 5] != 0 && monsterP[loc - 5] != 100){ // If the prob != 0 it is possible
 			possible++;
 		}
 		//count++;
 	}
 	if(loc < 20){
-		if(pitP[loc + 5] != 0){
+		if(pitP[loc + 5] != 0 && monsterP[loc + 5] != 100){
 			possible++;
 		}
 		//count++;
 	}
 	if((loc % 5) != 0){
-		if(pitP[loc - 1] != 0){
+		if(pitP[loc - 1] != 0 && monsterP[loc - 1] != 100){
 			possible++;
 		}
 		//count++;
 	}
 	if((loc % 5) != 4){
-		if(pitP[loc + 1] != 0){
+		if(pitP[loc + 1] != 0  && monsterP[loc + 1] != 100){
 			possible++;
 		}
 	}
 	int pitProb = (100 * pitNum) / possible;
 
 	if(loc > 4){
-		if(pitP[loc - 5] != 0){ // If the prob != 0 it is possible
+		if(pitP[loc - 5] != 0 && monsterP[loc - 5] != 100){ // If the prob != 0 it is possible
 			pitP[loc - 5] = pitProb;
 		}
 	}
 	if(loc < 20){
-		if(pitP[loc + 5] != 0){
+		if(pitP[loc + 5] != 0 && monsterP[loc + 5] != 100){
 			pitP[loc + 5] = pitProb;
 		}
 	}
 	if((loc % 5) != 0){
-		if(pitP[loc - 1] != 0){
+		if(pitP[loc - 1] != 0 && monsterP[loc - 1] != 100){
 			pitP[loc - 1] = pitProb;
 		}
 	}
 	if((loc % 5) != 4){
-		if(pitP[loc + 1] != 0){
-			pitP[loc + 5] = pitProb;
+		if(pitP[loc + 1] != 0 && monsterP[loc + 1] != 100){
+			pitP[loc + 1] = pitProb;
 		}
 	}
 
@@ -420,16 +420,16 @@ void printProb(){
 
 void printOptions(int loc){
 	if(loc > 4){
-		printf("Moving down to location %d has pitP: %d and monsterP %d\n", (loc-5), pitP[loc-5], monsterP[loc-5]);
+		printf("Moving South to location %d has pitP: %d and monsterP %d\n", (loc-5), pitP[loc-5], monsterP[loc-5]);
 	}
 	if(loc < 20){
-		printf("Moving up to location %d has pitP: %d and monsterP %d\n", (loc+5), pitP[loc+5], monsterP[loc+5]);
+		printf("Moving North to location %d has pitP: %d and monsterP %d\n", (loc+5), pitP[loc+5], monsterP[loc+5]);
 	}
 	if((loc % 5) != 0){
-		printf("Moving left to location %d has pitP: %d and monsterP %d\n", (loc-1), pitP[loc-1], monsterP[loc-1]);
+		printf("Moving West to location %d has pitP: %d and monsterP %d\n", (loc-1), pitP[loc-1], monsterP[loc-1]);
 	}
 	if((loc % 5) != 4){
-		printf("Moving right to location %d has pitP: %d and monsterP %d\n", (loc+1), pitP[loc+1], monsterP[loc+1]);
+		printf("Moving East to location %d has pitP: %d and monsterP %d\n", (loc+1), pitP[loc+1], monsterP[loc+1]);
 	}
 }
 /*struct obstacle{ // Monster and pits only need coordinates
@@ -516,8 +516,6 @@ int main()
 	pitP[Hero.x] = 0; // Obviously wherever we start has a 0% chance of having pit or monster
 	monsterP[Hero.x] = 0;
 
-
-	int turns = 0; // Keep track of turns 
 	while(1){
 		int surroundings = 0;
 		printCoordinates(Hero.x);
@@ -544,7 +542,5 @@ int main()
 		{
 			move(&Hero); //Handling moving
 		}
-
-		turns++;
 	}
 }
