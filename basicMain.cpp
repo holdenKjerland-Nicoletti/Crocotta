@@ -195,7 +195,7 @@ void shootArrow(struct hunter* Hero){
 		}
 
 		occupied[tmp] = 0;
-		cout<<"Monster coordinates : "<< Monster << endl;
+		//cout<<"Monster coordinates : "<< Monster << endl;
 		return;
 	}
 }
